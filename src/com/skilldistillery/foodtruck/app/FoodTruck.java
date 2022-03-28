@@ -48,16 +48,17 @@ public class FoodTruck {
 		this.rating = rating;
 	}
 	
-	public void greeting() {
-		System.out.println("Hello!  Welcome to the Food Truck Rating Application!");
-		System.out.println();
-		System.out.println("You will be able to add up to five different food trucks,");
-		System.out.println("with their name and the type of food they serve");
-		System.out.println("(tacos, pizza, ribs, burgers, sushi, whatever).");
-		System.out.println();
-		System.out.println("You will be able to give each food truck a rating");
-		System.out.println("(1-5, with 1 being worst and 5 being best).");
-		System.out.println();
+	public String greeting() {
+		String greeting = "Hello!  Welcome to the Food Truck Rating Application!\n";
+		greeting += "\n";
+		greeting += "You will be able to add up to five different food trucks,\n";
+		greeting += "with their name and the type of food they serve\n";
+		greeting += "(tacos, pizza, ribs, burgers, sushi, whatever).\n";
+		greeting += "\n";
+		greeting += "You will be able to give each food truck a rating\n";
+		greeting += "(1-5, with 1 being worst and 5 being best).\n";
+		greeting += "\n";
+		return greeting;
 	}
 
 }

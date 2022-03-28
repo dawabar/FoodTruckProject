@@ -23,7 +23,8 @@ public class FoodTruckApp {
 		Scanner sc = new Scanner(System.in);
 
 		//		Send introduction to user
-		FoodTruck.greeting();
+		String greeting = FoodTruck.greeting(); 
+		System.out.println(FoodTruck.greeting());
 
 //		Make a choice about whether to add another truck to the array
 		int truckArrayCount = 0;
