@@ -8,6 +8,7 @@ public class FoodTruckApp {
 	private static int idGenerator = 1001;
 
 //		Create new Scanner for user inputs
+	Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 //		User Story #1
@@ -20,42 +21,103 @@ public class FoodTruckApp {
 //			instead assigned automatically in the FoodTruck constructor 
 //			from a static field that is incremented as each truck is created.
 
-		Scanner sc = new Scanner(System.in);
+		FoodTruckApp fta = new FoodTruckApp();
 
-		//		Send introduction to user
-		String greeting = FoodTruck.greeting(); 
-		System.out.println(FoodTruck.greeting());
-
+		// Send introduction to user
+		fta.greeting();
 //		Make a choice about whether to add another truck to the array
+		FoodTruck trucks[] = new FoodTruck[5];
+//		fta.addFoodTrucks();
+		trucks[0] = new FoodTruck("Pizza Bob", "Pizza", 3);
+		trucks[0].setName("Pizza Bob");
+		trucks[0].setFoodType("Pizza");
+		trucks[0].setRating(3);
+		trucks[0].getIdNumber();
+		trucks[0].setIdNumber();
+
+		trucks[1] = new FoodTruck("Pizza Bob", "Pizza", 3);
+		trucks[1].getIdNumber();
+		trucks[1].setName("Sushi Express");
+		trucks[1].setFoodType("Sushi");
+		trucks[1].setRating(4);
+		trucks[1].setIdNumber();
+
+		trucks[2] = new FoodTruck("Pizza Bob", "Pizza", 3);
+		trucks[2].getIdNumber();
+		trucks[2].setName("Taco Terry");
+		trucks[2].setFoodType("Tacos");
+		trucks[2].setRating(5);
+		trucks[2].setIdNumber();
+
+		fta.giveMenu();
+	}
+
+	public void greeting() {
+		System.out.println("Hello!  Welcome to the Food Truck Rating Application!");
+		System.out.println();
+		System.out.println("You will be able to add up to five different food trucks,");
+		System.out.println("with their name and the type of food they serve");
+		System.out.println("(tacos, pizza, ribs, burgers, sushi, whatever).");
+		System.out.println();
+		System.out.println("You will be able to give each food truck a rating");
+		System.out.println("(1-5, with 1 being worst and 5 being best).");
+		System.out.println();
+	}
+
+	public void addFoodTrucks() {
 		int truckArrayCount = 0;
 		boolean keepGoing = true;
-		String userInput = "dummy data";
 		while (truckArrayCount < 5 && keepGoing == true) {
-			System.out.println("Do you want to enter a truck?");
-			System.out.println("Enter 'yes' to add a truck, enter 'quit' when you're done.");
-			userInput = sc.next();
-			userInput = userInput.trim();
-			System.out.println("Input value was " + userInput);
-			if (userInput.trim().toLowerCase().equals("quit")) {
+			System.out.println("Do you want to enter a truck? Y/N: ");
+			String userInput = sc.next();
+			userInput = userInput.toUpperCase().trim();
+			if (userInput.equals("N")) {
 				keepGoing = false;
-//				TODO remove this line -- System.out.println(userInput);
 				sc.nextLine();
 				break;
-			} else if (userInput.trim().toLowerCase().equals("yes")) {
-				System.out.println(userInput);
-				System.out.println("User chose YES");
-				truckArrayCount = getTrucks(truckArrayCount);
+			} else if (userInput.equals("Y")) {
+				FoodTruck tempTruck = getTrucks();
+				System.out.println(tempTruck.toString());
+				FoodTruck nextTruck = trucks[truckArrayCount];
+				nextTruck = tempTruck;
+				sc.nextLine();
+				truckArrayCount++;
 				break;
-			} else if (!userInput.trim().toLowerCase().equals("yes") && !userInput.equals("")) {
+			} else {
 				System.out.println(userInput);
 				System.out.println("Please enter a valid choice.");
 				continue;
 			}
 		}
+	}
 
+	// Add a truck to the trucks array
+	public FoodTruck getTrucks() {
+
+		String nameTemp = "";
+		String foodTemp = "";
+		int ratingTemp = 0;
+		sc.nextLine();
+		System.out.println("Enter a truck name: ");
+		nameTemp = sc.nextLine();
+		System.out.println("What kind of food does it serve: ");
+		foodTemp = sc.nextLine();
+		System.out.println("Give the food truck a rating (1-5): ");
+		ratingTemp = sc.nextInt();
+		while (ratingTemp < 1 || ratingTemp > 5) {
+			System.out.println("The rating must be a number between 1 and 5.");
+			System.out.println("Give the food truck a rating (1-5): \n");
+			ratingTemp = sc.nextInt();
+		}
+		FoodTruck newFT = new FoodTruck(nameTemp, foodTemp, ratingTemp);
+		newFT.setIdNumber();
+		return new FoodTruck(nameTemp, foodTemp, ratingTemp);
+	}
+
+	public void giveMenu() {
 		boolean keepDisplaying = true;
 		int choice;
-		do {
+		while (keepDisplaying = true) {
 			System.out.println("########################################");
 			System.out.println("# 1. List all food trucks              #");
 			System.out.println("# 2. Average rating of all food trucks #");
@@ -68,45 +130,54 @@ public class FoodTruckApp {
 			if (choice < 1 || choice > 4) {
 				System.out.println("Please enter a valid choice (1-4)");
 				continue;
+			} else {
+				switch (choice) {
+				case 1:
+					listFoodTrucks();
+				case 2:
+					averageRating();
+				case 3:
+					getHighestRated();
+				case 4:
+					keepDisplaying = false;
+					System.out.println("Thank you for using this system. Goodbye.");
+					break;
+				}
 			}
-			else {
-				switch (choice)
-			}
-			while (keepDisplaying = true) {
-		}
-			if (keepDisplaying == false) {
-				System.out.println("Thank you for using this system. Goodbye.");
-				break;
-			}
-			else if (choice < 1 || choice)
-
 		}
 
 	}
 
-
-	// Add a truck to the trucks array
-	public int getTrucks(int count) {
-
-		String nameTemp = "";
-		String foodTemp = "";
-		int ratingTemp = 0;
-		FoodTruck newFT;
-		System.out.println("Enter a truck name: \n");
-		nameTemp = sc.nextLine();
-		System.out.println("What kind of food does it serve: \n");
-		foodTemp = sc.nextLine();
-		System.out.println("Give the food truck a rating (1-5): \n");
-		ratingTemp = sc.nextInt();
-		while (ratingTemp < 1 || ratingTemp > 5) {
-			System.out.println("The rating must be a number between 1 and 5.");
-			System.out.println("Give the food truck a rating (1-5): \n");
-			ratingTemp = sc.nextInt();
+	public void listFoodTrucks() {
+		for (int i = 0; i < 5; i++) {
+			System.out.println(trucks[i].toString());
 		}
-		newFT = new FoodTruck(nameTemp, foodTemp, ratingTemp, idGenerator);
-		trucks[count] = newFT;
-		idGenerator += 1;
-		return count++;
+	}
+
+	public void averageRating() {
+		double average = 0;
+		int count = 0;
+		for (FoodTruck foodTruck : trucks) {
+			if (foodTruck.getRating() != 0) {
+				average += foodTruck.getRating();
+				count++;
+			}
+		}
+		average = average / count;
+		System.out.println("Average rating is " + average);
+	}
+
+	public void getHighestRated() {
+		int rating = 0;
+		int arrayLoc = -1;
+		for (int i = 0; i < trucks.length; i++) {
+			if (trucks[i].getRating() > rating) {
+				rating = trucks[i].getRating();
+				arrayLoc = i;
+				i++;
+			}
+		}
+		System.out.println("Highest rated truck is " + trucks[arrayLoc] + "with score " + rating);
 	}
 
 }
